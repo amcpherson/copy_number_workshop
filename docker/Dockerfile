@@ -18,4 +18,8 @@ RUN R -e 'BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")'
 RUN R -e 'BiocManager::install("MutationalPatterns")'
 RUN R -e 'devtools::install_github("shahcompbio/signals")'
 RUN install2.r --error VGAM
+RUN R -e 'BiocManager::install("SingleCellExperiment")'
+RUN apt-get install jags
+RUN R -e 'BiocManager::install("infercnv")'
+RUN install2.r --error Seurat
 
