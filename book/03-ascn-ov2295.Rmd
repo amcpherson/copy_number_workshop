@@ -1,0 +1,113 @@
+---
+title: "OV2295 Allele Specific Copy Number Analysis"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Allele specific analysis of OV2295
+
+## Introduction
+
+In this tutorial we will further analyze the OV2295 cell line DLP data, this time focusing on the allele specific copy number calling using the method described in "Single cell genomic variation induced by mutational processes in cancer", Funnell et al. (2022) https://doi.org/10.5281/zenodo.6998936.  The data from the Funnell et al. paper is deposited in zenodo (https://doi.org/10.5281/zenodo.6998936).
+
+## Load the required packages
+
+For this part of the tutorial we will use the signals R package developed for the Funnell et al paper.  Documentation for signals can be found here: https://shahcompbio.github.io/signals/.
+
+```{r echo=TRUE, warning = FALSE, message = FALSE}
+library(vroom)
+library(signals)
+```
+
+First read in the allele specific copy number data produced by signals.
+
+```{r message=FALSE, class.source="codeblock"}
+hscn <- vroom(
+  "ov2295_hscn.csv.gz",
+  col_types = cols(
+    chr = col_factor(NULL),
+    cell_id = col_factor(NULL),
+    state_AS_phased = col_factor(NULL),
+    state_phase = col_factor(NULL),
+  ),
+  col_select = c(
+    cell_id,
+    chr,
+    start,
+    end,
+    copy,
+    state,
+    alleleA,
+    alleleB,
+    totalcounts,
+    BAF,
+    state_min,
+    A,
+    B,
+    state_AS_phased,
+    state_phase,
+  ),
+)
+
+DT::datatable(
+  head(hscn),
+  filter = 'top',
+  options = list(
+    pageLength=50,
+    scrollX='400px',
+    autoWidth=TRUE))
+```
+
+We can visualize the distribution of SNP VAF per allele specific copy number state using the `plotBAFperstate` function.
+
+```{r class.source="codeblock",message=FALSE}
+plotBAFperstate(hscn, maxstate = 10)
+```
+
+Similar to the section on total copy number, we can cluster the copy number data.  The signals function `umap_clustering` clusters the cells by their copy number profiles by first creating a umap projection then clustering in that reduced dimension space.
+
+```{r class.source="codeblock",message=FALSE}
+clustering <- umap_clustering(hscn, field = "copy", seed = 1)
+
+ggplot(clustering$clustering, aes(x = umap1, y = umap2, color = clone_id)) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "X Axis Label", y = "Y Axis Label", color = "Color Legend")
+```
+
+We can then plot the total copy number using `plotHeatmap`.  The plot includes a clustering dendrogram (not necessarily a phylogenetic tree).
+
+```{r class.source="codeblock",message=FALSE}
+plotHeatmap(hscn, plotcol = "state", tree = clustering$tree, clusters = clustering$clustering)
+```
+
+In addition we can then plot the allele B copy number using `plotHeatmap`.
+
+```{r class.source="codeblock", message=FALSE}
+plotHeatmap(hscn, plotcol = "B", tree = clustering$tree, clusters = clustering$clustering)
+```
+
+Or we can plot the allele specific state which will give a better view of which regions are LOH of either A or B.
+
+```{r class.source="codeblock", message=FALSE}
+plotHeatmap(hscn, plotcol = "state_phase", tree = clustering$tree, clusters = clustering$clustering)
+```
+Finally we can plot both the BAF signal of a single cell.
+
+```{r class.source="codeblock", warning=FALSE, message=FALSE}
+plotCNprofileBAF(hscn, cellid = "SA921-A90554A-R03-C44")
+```
+
+Or of a cluster of cells.
+
+```{r message=FALSE, warning=FALSE, class.source="codeblock"}
+consensus_clusters <- consensuscopynumber(hscn, cl = clustering$clustering)
+
+plotCNprofileBAF(consensus_clusters, cellid = "A", y_axis_trans = "squashy")
+```
+
+Additional analyses:
+- cluster on allele specific copy number using signals, does the clustering change?
+- identify instances of mirrored allelic imbalance
+- find tumor supressor genes in LOH regions

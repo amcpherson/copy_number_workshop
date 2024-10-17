@@ -14,4 +14,8 @@ RUN R -e 'BiocManager::install("ComplexHeatmap")'
 RUN R -e 'BiocManager::install("ggtree")'
 RUN install2.r --error phytools
 RUN install2.r --error vcfR
+RUN R -e 'BiocManager::install("BSgenome.Hsapiens.UCSC.hg19")'
+RUN R -e 'BiocManager::install("MutationalPatterns")'
+RUN R -e 'devtools::install_github("shahcompbio/signals")'
+RUN install2.r --error VGAM
 

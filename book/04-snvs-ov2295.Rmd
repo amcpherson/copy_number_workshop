@@ -1,0 +1,85 @@
+---
+title: "OV2295 SNV Analysis"
+output:
+  html_document:
+    df_print: paged
+---
+
+# OV2295 SNV Analysis
+
+## Introduction
+
+In this tutorial we will explore the SNVs of the OV2295 cell lines.  We have run sbmclone (citation: https://academic.oup.com/bioinformatics/article/36/Supplement_1/i186/5870493, github: https://github.com/raphael-group/SBMClone) to produce a joint clustering of both cells and SNVs.
+
+This data is available from zenodo and can be downloaded with:
+TBD
+
+## Load the required packages
+
+```{r echo=TRUE, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(vroom)
+```
+
+## Read the SNV and Cell tables
+
+The SNV table shows all detected SNVs used in the analysis, and their assignment to an SNV 'block'.
+
+```{r class.source="codeblock",message=FALSE}
+snvs <- vroom("ov2295_snvs.csv")
+
+DT::datatable(
+  head(snvs, 5),
+  filter = 'top',
+  options = list(
+    pageLength=50,
+    scrollX='400px',
+    autoWidth=TRUE))
+```
+
+The cell table provides the cell block to which each cell was assigned.
+
+```{r class.source="codeblock",message=FALSE}
+cells <- vroom("ov2295_cells.csv")
+
+DT::datatable(
+  head(cells, 5),
+  filter = 'top',
+  options = list(
+    pageLength=50,
+    scrollX='400px',
+    autoWidth=TRUE))
+```
+
+The alt fractions table shows the fraction of alt reads across all SNVs for all cells within an SNV / block pair.
+
+```{r class.source="codeblock",message=FALSE}
+alt_fractions <- vroom("ov2295_snvs_alt_fraction.csv")
+
+alt_fractions_wide <- alt_fractions %>%
+  pivot_wider(names_from = cell_block_assignment, values_from = alt_fraction)
+alt_fractions_mat <- as.matrix(alt_fractions_wide[, -1])  # Exclude the first column to keep only the numeric values
+rownames(alt_fractions_mat) <- alt_fractions_wide$snv_block_assignment
+
+hm <- ComplexHeatmap::Heatmap(
+  matrix = alt_fractions_mat,
+  name = "fraction alt reads",
+  cluster_rows = TRUE,
+  cluster_columns = TRUE,
+  show_row_names = TRUE,
+  row_title = "snv block",
+  column_title = "cell block",
+  use_raster = TRUE,
+)
+  
+ComplexHeatmap::draw(hm, row_dend_side = "left")
+```
+
+Further analyses:
+- try visualizing the copy number data clustered by the cell blocks, how does this compare to the copy number clustering?
+- construct a phylogenetic tree for the SNV/cell blocks.  Does this contradict the dendrogram from copy number clustering?
+- what are the signatures of the branch specific vs common SNVs?
+
+
+
+

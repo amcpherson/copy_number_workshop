@@ -1,11 +1,11 @@
 ---
-title: "OV2295 scWGS Analysis"
+title: "OV2295 QC and Total Copy Number Analysis"
 output:
   html_document:
     df_print: paged
 ---
 
-# DLP Sequencing of an Ovarian Cancer Cell Line
+# OV2295 QC and Total Copy Number Analysis
 
 ## Introduction
 
@@ -455,7 +455,7 @@ knitr::kable(subset.gr, booktabs = TRUE)
 Finally, lets look at the gene content of some of the high level amplifications.  First read in a list of known oncogenic amplified genes from the cancer gene census.  Read hg19 genes from `TxDb.Hsapiens.UCSC.hg19.knownGene` and be careful to rename chromosomes, ie "chr9" -> "9".  Add gene symbols from `org.Hs.egSYMBOL`.
 
 ```{r class.source="codeblock"}
-cencus.amps <- read_csv('./Census_ampThu\ Apr\ 16\ 15_35_36\ 2020.csv') %>%
+cencus.amps <- read_csv('Census_ampThu\ Apr\ 16\ 15_35_36\ 2020.csv') %>%
   dplyr::rename(symbol = `Gene Symbol`)
 
 # read human genes, normalize chromosome names
