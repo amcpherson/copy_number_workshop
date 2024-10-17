@@ -51,6 +51,8 @@ DT::datatable(
     autoWidth=TRUE))
 ```
 
+## View the block matrix
+
 The alt fractions table shows the fraction of alt reads across all SNVs for all cells within an SNV / block pair.
 
 ```{r class.source="codeblock",message=FALSE}
@@ -76,6 +78,7 @@ ComplexHeatmap::draw(hm, row_dend_side = "left")
 ```
 
 Further analyses:
+
 - try visualizing the copy number data clustered by the cell blocks, how does this compare to the copy number clustering?
 - construct a phylogenetic tree for the SNV/cell blocks.  Does this contradict the dendrogram from copy number clustering?
 - what are the signatures of the branch specific vs common SNVs?

@@ -20,6 +20,8 @@ library(vroom)
 library(signals)
 ```
 
+## Read data and QC
+
 First read in the allele specific copy number data produced by signals.
 
 ```{r message=FALSE, class.source="codeblock"}
@@ -65,6 +67,8 @@ We can visualize the distribution of SNP VAF per allele specific copy number sta
 plotBAFperstate(hscn, maxstate = 10)
 ```
 
+## Clustering and heatmaps
+
 Similar to the section on total copy number, we can cluster the copy number data.  The signals function `umap_clustering` clusters the cells by their copy number profiles by first creating a umap projection then clustering in that reduced dimension space.
 
 ```{r class.source="codeblock",message=FALSE}
@@ -93,6 +97,9 @@ Or we can plot the allele specific state which will give a better view of which 
 ```{r class.source="codeblock", message=FALSE}
 plotHeatmap(hscn, plotcol = "state_phase", tree = clustering$tree, clusters = clustering$clustering)
 ```
+
+## Plot BAF of cells or clusters
+
 Finally we can plot both the BAF signal of a single cell.
 
 ```{r class.source="codeblock", warning=FALSE, message=FALSE}
@@ -107,7 +114,8 @@ consensus_clusters <- consensuscopynumber(hscn, cl = clustering$clustering)
 plotCNprofileBAF(consensus_clusters, cellid = "A", y_axis_trans = "squashy")
 ```
 
-Additional analyses:
+Further analyses:
+
 - cluster on allele specific copy number using signals, does the clustering change?
 - identify instances of mirrored allelic imbalance
 - find tumor supressor genes in LOH regions
