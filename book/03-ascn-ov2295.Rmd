@@ -18,6 +18,7 @@ For this part of the tutorial we will use the signals R package developed for th
 ```{r echo=TRUE, warning = FALSE, message = FALSE}
 library(vroom)
 library(signals)
+library(ggplot2)
 ```
 
 ## Read data and QC
