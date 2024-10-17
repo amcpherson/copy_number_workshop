@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 OV2295 SNV Analysis | OV2295 SNV Analysis</title>
+  <meta name="description" content="This is the lab practical for a module on single cell DNA analysis for the CBW Cancer Analysis Workshop" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 OV2295 SNV Analysis | OV2295 SNV Analysis" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is the lab practical for a module on single cell DNA analysis for the CBW Cancer Analysis Workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 OV2295 SNV Analysis | OV2295 SNV Analysis" />
+  
+  <meta name="twitter:description" content="This is the lab practical for a module on single cell DNA analysis for the CBW Cancer Analysis Workshop" />
+  
+
+<meta name="author" content="Andrew McPherson" />
+
+
+<meta name="date" content="2024-10-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="allele-specific-analysis-of-ov2295.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Single Cell DNA Analysis Lab</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Lab Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructions"><i class="fa fa-check"></i><b>1.1</b> Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html"><i class="fa fa-check"></i><b>2</b> OV2295 QC and Total Copy Number Analysis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#load-the-required-packages"><i class="fa fa-check"></i><b>2.2</b> Load the required packages</a></li>
+<li class="chapter" data-level="2.3" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#read-and-qc-the-copy-number-data"><i class="fa fa-check"></i><b>2.3</b> Read and QC the copy number data</a></li>
+<li class="chapter" data-level="2.4" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#copy-number-exploration"><i class="fa fa-check"></i><b>2.4</b> Copy number exploration</a></li>
+<li class="chapter" data-level="2.5" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#clustering"><i class="fa fa-check"></i><b>2.5</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html"><i class="fa fa-check"></i><b>3</b> Allele specific analysis of OV2295</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#load-the-required-packages-1"><i class="fa fa-check"></i><b>3.2</b> Load the required packages</a></li>
+<li class="chapter" data-level="3.3" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#read-data-and-qc"><i class="fa fa-check"></i><b>3.3</b> Read data and QC</a></li>
+<li class="chapter" data-level="3.4" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#clustering-and-heatmaps"><i class="fa fa-check"></i><b>3.4</b> Clustering and heatmaps</a></li>
+<li class="chapter" data-level="3.5" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#plot-baf-of-cells-or-clusters"><i class="fa fa-check"></i><b>3.5</b> Plot BAF of cells or clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html"><i class="fa fa-check"></i><b>4</b> OV2295 SNV Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#load-the-required-packages-2"><i class="fa fa-check"></i><b>4.2</b> Load the required packages</a></li>
+<li class="chapter" data-level="4.3" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#read-the-snv-and-cell-tables"><i class="fa fa-check"></i><b>4.3</b> Read the SNV and Cell tables</a></li>
+<li class="chapter" data-level="4.4" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#view-the-block-matrix"><i class="fa fa-check"></i><b>4.4</b> View the block matrix</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">OV2295 SNV Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ov2295-snv-analysis" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> OV2295 SNV Analysis<a href="ov2295-snv-analysis.html#ov2295-snv-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction<a href="ov2295-snv-analysis.html#introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this tutorial we will explore the SNVs of the OV2295 cell lines. We have run sbmclone (citation: <a href="https://academic.oup.com/bioinformatics/article/36/Supplement_1/i186/5870493" class="uri">https://academic.oup.com/bioinformatics/article/36/Supplement_1/i186/5870493</a>, github: <a href="https://github.com/raphael-group/SBMClone" class="uri">https://github.com/raphael-group/SBMClone</a>) to produce a joint clustering of both cells and SNVs.</p>
+<p>This data is available from zenodo and can be downloaded with:
+TBD</p>
+</div>
+<div id="load-the-required-packages-2" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Load the required packages<a href="ov2295-snv-analysis.html#load-the-required-packages-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="ov2295-snv-analysis.html#cb58-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb58-2"><a href="ov2295-snv-analysis.html#cb58-2" tabindex="-1"></a><span class="fu">library</span>(vroom)</span></code></pre></div>
+</div>
+<div id="read-the-snv-and-cell-tables" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Read the SNV and Cell tables<a href="ov2295-snv-analysis.html#read-the-snv-and-cell-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The SNV table shows all detected SNVs used in the analysis, and their assignment to an SNV ‘block’.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb59-1"><a href="ov2295-snv-analysis.html#cb59-1" tabindex="-1"></a>snvs <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="st">&quot;ov2295_snvs.csv&quot;</span>)</span>
+<span id="cb59-2"><a href="ov2295-snv-analysis.html#cb59-2" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="ov2295-snv-analysis.html#cb59-3" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb59-4"><a href="ov2295-snv-analysis.html#cb59-4" tabindex="-1"></a>  <span class="fu">head</span>(snvs, <span class="dv">5</span>),</span>
+<span id="cb59-5"><a href="ov2295-snv-analysis.html#cb59-5" tabindex="-1"></a>  <span class="at">filter =</span> <span class="st">&#39;top&#39;</span>,</span>
+<span id="cb59-6"><a href="ov2295-snv-analysis.html#cb59-6" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb59-7"><a href="ov2295-snv-analysis.html#cb59-7" tabindex="-1"></a>    <span class="at">pageLength=</span><span class="dv">50</span>,</span>
+<span id="cb59-8"><a href="ov2295-snv-analysis.html#cb59-8" tabindex="-1"></a>    <span class="at">scrollX=</span><span class="st">&#39;400px&#39;</span>,</span>
+<span id="cb59-9"><a href="ov2295-snv-analysis.html#cb59-9" tabindex="-1"></a>    <span class="at">autoWidth=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-10b2a2ce93376f6f5609" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-10b2a2ce93376f6f5609">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"100207753\" data-max=\"100397396\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"5\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.919241532077919\" data-max=\"0.91924153207792\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.982345474620051\" data-max=\"0.982345474620052\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["1","2","3","4","5"],["1","1","1","1","1"],[100207753,100252071,100306227,100338203,100397396],["G","T","C","G","A"],["C","C","A","C","T"],["1-100207753:G&gt;C","1-100252071:T&gt;C","1-100306227:C&gt;A","1-100338203:G&gt;C","1-100397396:A&gt;T"],[4,0,3,4,5],[0.9192415320779193,0.9192415320779193,0.9192415320779193,0.9192415320779193,0.9192415320779193],[0.9823454746200512,0.9823454746200512,0.9823454746200512,0.9823454746200512,0.9823454746200512]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>chromosome<\/th>\n      <th>position<\/th>\n      <th>ref<\/th>\n      <th>alt<\/th>\n      <th>snv_id<\/th>\n      <th>block_assignment<\/th>\n      <th>mean_cell_block_ari<\/th>\n      <th>mean_snv_block_ari<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":50,"scrollX":"400px","autoWidth":true,"columnDefs":[{"className":"dt-right","targets":[2,6,7,8]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"chromosome","targets":1},{"name":"position","targets":2},{"name":"ref","targets":3},{"name":"alt","targets":4},{"name":"snv_id","targets":5},{"name":"block_assignment","targets":6},{"name":"mean_cell_block_ari","targets":7},{"name":"mean_snv_block_ari","targets":8}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<p>The cell table provides the cell block to which each cell was assigned.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb60-1"><a href="ov2295-snv-analysis.html#cb60-1" tabindex="-1"></a>cells <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="st">&quot;ov2295_cells.csv&quot;</span>)</span>
+<span id="cb60-2"><a href="ov2295-snv-analysis.html#cb60-2" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="ov2295-snv-analysis.html#cb60-3" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb60-4"><a href="ov2295-snv-analysis.html#cb60-4" tabindex="-1"></a>  <span class="fu">head</span>(cells, <span class="dv">5</span>),</span>
+<span id="cb60-5"><a href="ov2295-snv-analysis.html#cb60-5" tabindex="-1"></a>  <span class="at">filter =</span> <span class="st">&#39;top&#39;</span>,</span>
+<span id="cb60-6"><a href="ov2295-snv-analysis.html#cb60-6" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb60-7"><a href="ov2295-snv-analysis.html#cb60-7" tabindex="-1"></a>    <span class="at">pageLength=</span><span class="dv">50</span>,</span>
+<span id="cb60-8"><a href="ov2295-snv-analysis.html#cb60-8" tabindex="-1"></a>    <span class="at">scrollX=</span><span class="st">&#39;400px&#39;</span>,</span>
+<span id="cb60-9"><a href="ov2295-snv-analysis.html#cb60-9" tabindex="-1"></a>    <span class="at">autoWidth=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-5e00631100fdb2a7e4cf" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5e00631100fdb2a7e4cf">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"5\" data-max=\"7\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.919241532077919\" data-max=\"0.91924153207792\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.982345474620051\" data-max=\"0.982345474620052\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["1","2","3","4","5"],["SA1090-A96213A-R20-C08","SA1090-A96213A-R20-C09","SA1090-A96213A-R20-C10","SA1090-A96213A-R20-C11","SA1090-A96213A-R20-C12"],[7,6,5,6,5],[0.9192415320779193,0.9192415320779193,0.9192415320779193,0.9192415320779193,0.9192415320779193],[0.9823454746200512,0.9823454746200512,0.9823454746200512,0.9823454746200512,0.9823454746200512]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>cell_id<\/th>\n      <th>block_assignment<\/th>\n      <th>mean_cell_block_ari<\/th>\n      <th>mean_snv_block_ari<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":50,"scrollX":"400px","autoWidth":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"cell_id","targets":1},{"name":"block_assignment","targets":2},{"name":"mean_cell_block_ari","targets":3},{"name":"mean_snv_block_ari","targets":4}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="view-the-block-matrix" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> View the block matrix<a href="ov2295-snv-analysis.html#view-the-block-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The alt fractions table shows the fraction of alt reads across all SNVs for all cells within an SNV / block pair.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb61-1"><a href="ov2295-snv-analysis.html#cb61-1" tabindex="-1"></a>alt_fractions <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="st">&quot;ov2295_snvs_alt_fraction.csv&quot;</span>)</span>
+<span id="cb61-2"><a href="ov2295-snv-analysis.html#cb61-2" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="ov2295-snv-analysis.html#cb61-3" tabindex="-1"></a>alt_fractions_wide <span class="ot">&lt;-</span> alt_fractions <span class="sc">%&gt;%</span></span>
+<span id="cb61-4"><a href="ov2295-snv-analysis.html#cb61-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cell_block_assignment, <span class="at">values_from =</span> alt_fraction)</span>
+<span id="cb61-5"><a href="ov2295-snv-analysis.html#cb61-5" tabindex="-1"></a>alt_fractions_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(alt_fractions_wide[, <span class="sc">-</span><span class="dv">1</span>])  <span class="co"># Exclude the first column to keep only the numeric values</span></span>
+<span id="cb61-6"><a href="ov2295-snv-analysis.html#cb61-6" tabindex="-1"></a><span class="fu">rownames</span>(alt_fractions_mat) <span class="ot">&lt;-</span> alt_fractions_wide<span class="sc">$</span>snv_block_assignment</span>
+<span id="cb61-7"><a href="ov2295-snv-analysis.html#cb61-7" tabindex="-1"></a></span>
+<span id="cb61-8"><a href="ov2295-snv-analysis.html#cb61-8" tabindex="-1"></a>hm <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">Heatmap</span>(</span>
+<span id="cb61-9"><a href="ov2295-snv-analysis.html#cb61-9" tabindex="-1"></a>  <span class="at">matrix =</span> alt_fractions_mat,</span>
+<span id="cb61-10"><a href="ov2295-snv-analysis.html#cb61-10" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">&quot;fraction alt reads&quot;</span>,</span>
+<span id="cb61-11"><a href="ov2295-snv-analysis.html#cb61-11" tabindex="-1"></a>  <span class="at">cluster_rows =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-12"><a href="ov2295-snv-analysis.html#cb61-12" tabindex="-1"></a>  <span class="at">cluster_columns =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-13"><a href="ov2295-snv-analysis.html#cb61-13" tabindex="-1"></a>  <span class="at">show_row_names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-14"><a href="ov2295-snv-analysis.html#cb61-14" tabindex="-1"></a>  <span class="at">row_title =</span> <span class="st">&quot;snv block&quot;</span>,</span>
+<span id="cb61-15"><a href="ov2295-snv-analysis.html#cb61-15" tabindex="-1"></a>  <span class="at">column_title =</span> <span class="st">&quot;cell block&quot;</span>,</span>
+<span id="cb61-16"><a href="ov2295-snv-analysis.html#cb61-16" tabindex="-1"></a>  <span class="at">use_raster =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-17"><a href="ov2295-snv-analysis.html#cb61-17" tabindex="-1"></a>)</span>
+<span id="cb61-18"><a href="ov2295-snv-analysis.html#cb61-18" tabindex="-1"></a>  </span>
+<span id="cb61-19"><a href="ov2295-snv-analysis.html#cb61-19" tabindex="-1"></a>ComplexHeatmap<span class="sc">::</span><span class="fu">draw</span>(hm, <span class="at">row_dend_side =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p>Further analyses:</p>
+<ul>
+<li>try visualizing the copy number data clustered by the cell blocks, how does this compare to the copy number clustering?</li>
+<li>construct a phylogenetic tree for the SNV/cell blocks. Does this contradict the dendrogram from copy number clustering?</li>
+<li>what are the signatures of the branch specific vs common SNVs?</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="allele-specific-analysis-of-ov2295.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf", "book.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

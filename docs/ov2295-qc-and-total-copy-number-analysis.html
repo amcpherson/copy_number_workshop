@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 OV2295 QC and Total Copy Number Analysis | OV2295 SNV Analysis</title>
+  <meta name="description" content="This is the lab practical for a module on single cell DNA analysis for the CBW Cancer Analysis Workshop" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 OV2295 QC and Total Copy Number Analysis | OV2295 SNV Analysis" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is the lab practical for a module on single cell DNA analysis for the CBW Cancer Analysis Workshop" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 OV2295 QC and Total Copy Number Analysis | OV2295 SNV Analysis" />
+  
+  <meta name="twitter:description" content="This is the lab practical for a module on single cell DNA analysis for the CBW Cancer Analysis Workshop" />
+  
+
+<meta name="author" content="Andrew McPherson" />
+
+
+<meta name="date" content="2024-10-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="allele-specific-analysis-of-ov2295.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.33/datatables.js"></script>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Single Cell DNA Analysis Lab</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Lab Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructions"><i class="fa fa-check"></i><b>1.1</b> Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html"><i class="fa fa-check"></i><b>2</b> OV2295 QC and Total Copy Number Analysis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#load-the-required-packages"><i class="fa fa-check"></i><b>2.2</b> Load the required packages</a></li>
+<li class="chapter" data-level="2.3" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#read-and-qc-the-copy-number-data"><i class="fa fa-check"></i><b>2.3</b> Read and QC the copy number data</a></li>
+<li class="chapter" data-level="2.4" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#copy-number-exploration"><i class="fa fa-check"></i><b>2.4</b> Copy number exploration</a></li>
+<li class="chapter" data-level="2.5" data-path="ov2295-qc-and-total-copy-number-analysis.html"><a href="ov2295-qc-and-total-copy-number-analysis.html#clustering"><i class="fa fa-check"></i><b>2.5</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html"><i class="fa fa-check"></i><b>3</b> Allele specific analysis of OV2295</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#load-the-required-packages-1"><i class="fa fa-check"></i><b>3.2</b> Load the required packages</a></li>
+<li class="chapter" data-level="3.3" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#read-data-and-qc"><i class="fa fa-check"></i><b>3.3</b> Read data and QC</a></li>
+<li class="chapter" data-level="3.4" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#clustering-and-heatmaps"><i class="fa fa-check"></i><b>3.4</b> Clustering and heatmaps</a></li>
+<li class="chapter" data-level="3.5" data-path="allele-specific-analysis-of-ov2295.html"><a href="allele-specific-analysis-of-ov2295.html#plot-baf-of-cells-or-clusters"><i class="fa fa-check"></i><b>3.5</b> Plot BAF of cells or clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html"><i class="fa fa-check"></i><b>4</b> OV2295 SNV Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#load-the-required-packages-2"><i class="fa fa-check"></i><b>4.2</b> Load the required packages</a></li>
+<li class="chapter" data-level="4.3" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#read-the-snv-and-cell-tables"><i class="fa fa-check"></i><b>4.3</b> Read the SNV and Cell tables</a></li>
+<li class="chapter" data-level="4.4" data-path="ov2295-snv-analysis.html"><a href="ov2295-snv-analysis.html#view-the-block-matrix"><i class="fa fa-check"></i><b>4.4</b> View the block matrix</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">OV2295 SNV Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ov2295-qc-and-total-copy-number-analysis" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> OV2295 QC and Total Copy Number Analysis<a href="ov2295-qc-and-total-copy-number-analysis.html#ov2295-qc-and-total-copy-number-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction<a href="ov2295-qc-and-total-copy-number-analysis.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this tutorial we will analyze the OV2295 cell line DLP data from the paper “Clonal Decomposition and DNA Replication States Defined by Scaled Single-Cell Genome Sequencing”, Laks et al. (2019) <a href="https://doi.org/10.1016/j.cell.2019.10.026" class="uri">https://doi.org/10.1016/j.cell.2019.10.026</a>. The OV2295 cell lines were generated from a primary, metastasis and relapse specimens obtained from a patient with high grade serous ovarian cancer (see Létourneau et al. (2012), <a href="https://doi.org/10.1186/1471-2407-12-379" class="uri">https://doi.org/10.1186/1471-2407-12-379</a>). The cell lines have a high degree of genomic instability, and significant genomic heterogeneity including with respect to large chromosomal changes. The data from the Laks et al. paper is deposited in zenodo (<a href="https://doi.org/10.5281/zenodo.3445364" class="uri">https://doi.org/10.5281/zenodo.3445364</a>).</p>
+</div>
+<div id="load-the-required-packages" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Load the required packages<a href="ov2295-qc-and-total-copy-number-analysis.html#load-the-required-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This tutorial will rely heavily on the <a href="https://www.tidyverse.org/">tidyverse</a> packages including <a href="https://ggplot2.tidyverse.org/">ggplot2</a>. Heatmap plotting will use <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/">ComplexHeatmap</a> and manipulation of genomic segment data will be done with <a href="https://bioconductor.org/packages/release/bioc/vignettes/GenomicRanges/inst/doc/GenomicRangesIntroduction.html">GenomicRanges</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb3-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-3" tabindex="-1"></a><span class="fu">library</span>(vroom)</span>
+<span id="cb3-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-4" tabindex="-1"></a><span class="fu">library</span>(ggExtra)</span>
+<span id="cb3-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-5" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb3-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-6" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb3-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-7" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb3-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-8" tabindex="-1"></a><span class="fu">library</span>(bluster)</span>
+<span id="cb3-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-9" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb3-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-10" tabindex="-1"></a><span class="fu">library</span>(umap)</span>
+<span id="cb3-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-11" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb3-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-12" tabindex="-1"></a><span class="fu">library</span>(Homo.sapiens)</span>
+<span id="cb3-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb3-13" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+</div>
+<div id="read-and-qc-the-copy-number-data" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Read and QC the copy number data<a href="ov2295-qc-and-total-copy-number-analysis.html#read-and-qc-the-copy-number-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This data is available from zenodo and can be downloaded with:
+<code>wget "https://zenodo.org/record/3445364/files/ov2295_cell_cn.csv.gz"</code>
+<code>wget "https://zenodo.org/record/3445364/files/ov2295_cell_metrics.csv.gz"</code></p>
+<p>The data was analyzed using the DLP single_cell_pipeline: <a href="https://github.com/shahcompbio/single_cell_pipeline" class="uri">https://github.com/shahcompbio/single_cell_pipeline</a>.</p>
+<p>We will first read the metrics data, assess the quality of the cells and filter where necessary. The metrics file provided by the many columns but we will focus on quality and total_reads for filtering. Quality is calculated using a classifier trained on manually curated cell quality calls and uses many of the other metrics as features.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb4-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-1" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">vroom</span>(<span class="st">&quot;ov2295_cell_metrics.csv.gz&quot;</span>)</span>
+<span id="cb4-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-3" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb4-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-4" tabindex="-1"></a>  <span class="fu">head</span>(metrics),</span>
+<span id="cb4-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-5" tabindex="-1"></a>  <span class="at">filter =</span> <span class="st">&#39;top&#39;</span>,</span>
+<span id="cb4-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-6" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb4-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-7" tabindex="-1"></a>    <span class="at">pageLength=</span><span class="dv">50</span>,</span>
+<span id="cb4-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-8" tabindex="-1"></a>    <span class="at">scrollX=</span><span class="st">&#39;400px&#39;</span>,</span>
+<span id="cb4-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb4-9" tabindex="-1"></a>    <span class="at">autoWidth=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-0ffacce09307dc794cd2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0ffacce09307dc794cd2">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td><\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1054\" data-max=\"113421\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"5605\" data-max=\"5554326\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"25\" data-max=\"44742\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"70\" data-max=\"1636879\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"352397\" data-max=\"1469497\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.0280775785117\" data-max=\"0.297331874423\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"235789\" data-max=\"7488663\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"608326\" data-max=\"12127852\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"12323\" data-max=\"11222074\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"338\" data-max=\"3318500\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"8186\" data-max=\"8881854\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.000338684377527\" data-max=\"0.213167407489\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.00034\" data-max=\"0.248342\" data-scale=\"6\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"164\" data-max=\"280\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"186.486199\" data-max=\"341.879476\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"97.249687\" data-max=\"227.675035\" data-scale=\"6\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3\" data-max=\"70\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3\" data-max=\"70\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"28\" data-max=\"34\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1\" data-max=\"6\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.91313e-08\" data-max=\"0.211090456362805\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.08087643e-07\" data-max=\"0.500000015170092\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.885862e-09\" data-max=\"0.500000026957363\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.089795241992086\" data-max=\"0.944122047743692\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.416110943018762\" data-max=\"0.583682622690966\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.70424639e-07\" data-max=\"0.999999917740242\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.29406068431246\" data-max=\"1297.33227196104\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2\" data-max=\"1269\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.70140312440384\" data-max=\"535.70606433388\" data-scale=\"14\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"10205\" data-max=\"6926457\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1610.83801133142\" data-max=\"15748.8571665562\" data-scale=\"12\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"308.383316381494\" data-max=\"2191.19652279417\" data-scale=\"13\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.070187788634716\" data-max=\"0.624999975442537\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0.224699038637134\" data-max=\"2.07330259643021\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"3.6722094e-08\" data-max=\"0.499999989212775\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"93\" data-max=\"3099\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2.38744009962361\" data-max=\"6.90237837044224\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"2\" data-max=\"11\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"-10197.6165058745\" data-max=\"1333.17682233285\" data-scale=\"12\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"1.00000003308881\" data-max=\"5.9419088769934\" data-scale=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"0.984\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"64\" data-max=\"572\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["1","2","3","4","5","6"],["SA922-A90554B-R34-C70","SA922-A90554B-R28-C09","SA922-A90554B-R28-C03","SA922-A90554B-R28-C07","SA922-A90554B-R28-C05","SA922-A90554B-R34-C05"],[70068,49767,1113,113421,1054,1545],[2462814,2723310,5605,5554326,20043,30598],[19418,19848,198,44742,25,171],[711792,701345,70,1636879,608,1752],[352397,588432,1261949,905778,567186,1469497],[0.290496459352,0.260503126872,0.0280775785117,0.297331874423,0.0319154107924,0.0604867630417],[3404765,4353052,235789,7488663,343193,265305],[5348094,6084820,1274272,12127852,608326,1532238],[4995697,5496388,12323,11222074,41140,62741],[1443002,1422538,338,3318500,1241,3675],[4176586,3688510,8186,8881854,30718,45520],[0.108653461872,0.0976288050338,0.000338684377527,0.213167407489,0.00120446690813,0.00173658463471],[0.119764,0.106832,0.00034,0.248342,0.001213,0.001752],[280,164,213,221,217,204],[341.8794759999999,186.486199,255.181199,261.879068,264.571443,244.368131],[227.675035,97.24968699999999,159.275878,160.730523,172.261424,152.670328],["GCTGTA-ATTATA","TAAGGC-TATCGT","GTCCTT-TATCGT","TTGCGG-TATCGT","TAGGAT-TATCGT","TAGGAT-ATTATA"],[70,9,3,7,5,5],[3,64,70,66,68,68],["i5-34","i5-28","i5-28","i5-28","i5-28","i5-34"],["C","C","C","C","C","C"],["GCTGTA","TAAGGC","GTCCTT","TTGCGG","TAGGAT","TAGGAT"],["A","A","NTC","A","NCC","NCC"],["i7-70","i7-09","i7-03","i7-07","i7-05","i7-05"],["C1","C1","C1","C1","C1","C1"],["SA922","SA922","SA922","SA922","SA922","SA922"],["ATTATA","TATCGT","TATCGT","TATCGT","TATCGT","ATTATA"],[34,28,28,28,28,34],["A90554B","A90554B","A90554B","A90554B","A90554B","A90554B"],[0,0,0,0,0,0],[6,5,2,2,2,1],[0.211090456362805,0.12928765748772,1.03312110200093e-07,0.08959941579046,0.08333326187653969,2.91313000388982e-08],[0.4437306016129871,0.284760184966217,1.0808764394632e-07,0.220095006546672,0.0833335648196547,0.5000000151700911],[0.3882022905207601,0.264513500311543,1.885862799255729e-09,0.210668536174778,4.16629308830352e-09,0.5000000269573621],[0.9108322324145368,0.9209530406948052,0.0897952419920864,0.944122047743692,0.308520456042079,0.382953524568451],[0.433665083516754,0.420682738340622,0.5165063098595409,0.4161109430187629,0.583682622690966,0.5600716599181739],[0,0,0,0,0,0],[0.241136875750182,0.210627999736375,1.70424639622802e-07,0.520327779551236,0.999999850570352,0.999999917740242],[580.6168977144999,655.46975088968,3.29406068431246,1297.33227196104,6.99959489568564,9.54976030680729],[568,622,2,1269,6,8],[252.079295929584,287.423819175262,1.70140312440384,535.70606433388,4.08554194646329,5.34855011560709],[3099333,3499553,10205,6926457,34557,49802],[7444.155982363221,2189.81575386996,2187.65235944028,1610.83801133142,15748.8571665562,7631.47774544472],[1144.91021894771,423.4378581113591,364.8222711574299,308.383316381494,1474.23821965957,2191.19652279417],[0.076997335037369,0.07018778863471679,0.0833334265476581,0.133990892078462,0.166666702036063,0.624999975442537],[0.623423233454338,0.361665296164786,0.832407099787669,0.224699038637134,2.07330259643021,1.05559246068464],[0.0411585278652754,0.0413207416925988,3.67220942543156e-08,0.0830381319544842,4.14654741653919e-08,0.499999989212775],[150,93,2136,93,3099,118],[5.46952855524003,4.13257679783462,3.29406069378389,4.11160741822466,6.90237837044224,2.38744009962361],[7,5,2,5,11,2],[-6762.71327286037,-4189.12441397006,1333.17682233285,-2830.59014881121,-10197.6165058745,-8615.348218423509],[5.941908876993399,4.94075876045388,1.9999998476544,2.01312286067933,1.97222285781993,1.00000003308881],[0.482,0.88,0,0.984,0,0.006],[139,572,64,536,185,98]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>cell_id<\/th>\n      <th>unpaired_mapped_reads<\/th>\n      <th>paired_mapped_reads<\/th>\n      <th>unpaired_duplicate_reads<\/th>\n      <th>paired_duplicate_reads<\/th>\n      <th>unmapped_reads<\/th>\n      <th>percent_duplicate_reads<\/th>\n      <th>estimated_library_size<\/th>\n      <th>total_reads<\/th>\n      <th>total_mapped_reads<\/th>\n      <th>total_duplicate_reads<\/th>\n      <th>total_properly_paired<\/th>\n      <th>coverage_breadth<\/th>\n      <th>coverage_depth<\/th>\n      <th>median_insert_size<\/th>\n      <th>mean_insert_size<\/th>\n      <th>standard_deviation_insert_size<\/th>\n      <th>index_sequence<\/th>\n      <th>column<\/th>\n      <th>img_col<\/th>\n      <th>index_i5<\/th>\n      <th>sample_type<\/th>\n      <th>primer_i7<\/th>\n      <th>experimental_condition<\/th>\n      <th>index_i7<\/th>\n      <th>cell_call<\/th>\n      <th>sample_id<\/th>\n      <th>primer_i5<\/th>\n      <th>row<\/th>\n      <th>library_id<\/th>\n      <th>index<\/th>\n      <th>multiplier<\/th>\n      <th>MSRSI_non_integerness<\/th>\n      <th>MBRSI_dispersion_non_integerness<\/th>\n      <th>MBRSM_dispersion<\/th>\n      <th>autocorrelation_hmmcopy<\/th>\n      <th>cv_hmmcopy<\/th>\n      <th>empty_bins_hmmcopy<\/th>\n      <th>mad_hmmcopy<\/th>\n      <th>mean_hmmcopy_reads_per_bin<\/th>\n      <th>median_hmmcopy_reads_per_bin<\/th>\n      <th>std_hmmcopy_reads_per_bin<\/th>\n      <th>total_mapped_reads_hmmcopy<\/th>\n      <th>total_halfiness<\/th>\n      <th>scaled_halfiness<\/th>\n      <th>mean_state_mads<\/th>\n      <th>mean_state_vars<\/th>\n      <th>mad_neutral_state<\/th>\n      <th>breakpoints<\/th>\n      <th>mean_copy<\/th>\n      <th>state_mode<\/th>\n      <th>log_likelihood<\/th>\n      <th>true_multiplier<\/th>\n      <th>quality<\/th>\n      <th>order<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":50,"scrollX":"400px","autoWidth":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,29,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"cell_id","targets":1},{"name":"unpaired_mapped_reads","targets":2},{"name":"paired_mapped_reads","targets":3},{"name":"unpaired_duplicate_reads","targets":4},{"name":"paired_duplicate_reads","targets":5},{"name":"unmapped_reads","targets":6},{"name":"percent_duplicate_reads","targets":7},{"name":"estimated_library_size","targets":8},{"name":"total_reads","targets":9},{"name":"total_mapped_reads","targets":10},{"name":"total_duplicate_reads","targets":11},{"name":"total_properly_paired","targets":12},{"name":"coverage_breadth","targets":13},{"name":"coverage_depth","targets":14},{"name":"median_insert_size","targets":15},{"name":"mean_insert_size","targets":16},{"name":"standard_deviation_insert_size","targets":17},{"name":"index_sequence","targets":18},{"name":"column","targets":19},{"name":"img_col","targets":20},{"name":"index_i5","targets":21},{"name":"sample_type","targets":22},{"name":"primer_i7","targets":23},{"name":"experimental_condition","targets":24},{"name":"index_i7","targets":25},{"name":"cell_call","targets":26},{"name":"sample_id","targets":27},{"name":"primer_i5","targets":28},{"name":"row","targets":29},{"name":"library_id","targets":30},{"name":"index","targets":31},{"name":"multiplier","targets":32},{"name":"MSRSI_non_integerness","targets":33},{"name":"MBRSI_dispersion_non_integerness","targets":34},{"name":"MBRSM_dispersion","targets":35},{"name":"autocorrelation_hmmcopy","targets":36},{"name":"cv_hmmcopy","targets":37},{"name":"empty_bins_hmmcopy","targets":38},{"name":"mad_hmmcopy","targets":39},{"name":"mean_hmmcopy_reads_per_bin","targets":40},{"name":"median_hmmcopy_reads_per_bin","targets":41},{"name":"std_hmmcopy_reads_per_bin","targets":42},{"name":"total_mapped_reads_hmmcopy","targets":43},{"name":"total_halfiness","targets":44},{"name":"scaled_halfiness","targets":45},{"name":"mean_state_mads","targets":46},{"name":"mean_state_vars","targets":47},{"name":"mad_neutral_state","targets":48},{"name":"breakpoints","targets":49},{"name":"mean_copy","targets":50},{"name":"state_mode","targets":51},{"name":"log_likelihood","targets":52},{"name":"true_multiplier","targets":53},{"name":"quality","targets":54},{"name":"order","targets":55}],"order":[],"orderClasses":false,"orderCellsTop":true},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<p>Plot a scatterplot of quality by total reads with marginals on the axes. The cloud of cells with significant read count and quality less than 0.75 are cells for which we cannot effectively predict copy number. These cells could either be cycling, or for which the genomic DNA degraded significantly prior to sequencing, or for which tagmentation failed.</p>
+<p>The plots in this notebook will be using ggplot extensively. I recommend the r4ds tutorials (<a href="https://r4ds.had.co.nz/data-visualisation.html" class="uri">https://r4ds.had.co.nz/data-visualisation.html</a>) and the ggplot cheat sheet (<a href="https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf</a>) for further reference.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb5-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb5-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> metrics <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb5-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>quality, <span class="at">y=</span>total_reads)) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb5-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb5-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb5-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb5-5" tabindex="-1"></a><span class="fu">ggMarginal</span>(p, <span class="at">type=</span><span class="st">&quot;histogram&quot;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Filter reads based on a quality threshold of 0.85 and a total read count threshold of 500k reads. Also filter control cells based on the experimental_condition and sample_id columns.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb6-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb6-1" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> metrics <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb6-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb6-2" tabindex="-1"></a>  quality <span class="sc">&gt;=</span> <span class="fl">0.85</span>,</span>
+<span id="cb6-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb6-3" tabindex="-1"></a>  total_reads <span class="sc">&gt;</span> <span class="dv">500000</span>,</span>
+<span id="cb6-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb6-4" tabindex="-1"></a>  <span class="sc">!</span>(experimental_condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;GM&quot;</span>, <span class="st">&quot;gDNA&quot;</span>)),</span>
+<span id="cb6-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb6-5" tabindex="-1"></a>  sample_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;SA1090&quot;</span>, <span class="st">&quot;SA921&quot;</span>, <span class="st">&quot;SA922&quot;</span>))</span></code></pre></div>
+<p>Read in the copy number data. Using vroom::vroom will significantly speed up data loading and using factors for chr and cell_id and ignoring irrelevant columns will reduce the memory footprint.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb7-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-1" tabindex="-1"></a>cn <span class="ot">&lt;-</span> <span class="fu">vroom</span>(</span>
+<span id="cb7-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-2" tabindex="-1"></a>  <span class="st">&#39;ov2295_cell_cn.csv.gz&#39;</span>,</span>
+<span id="cb7-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-3" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb7-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-4" tabindex="-1"></a>    <span class="at">chr =</span> <span class="fu">col_factor</span>(<span class="cn">NULL</span>),</span>
+<span id="cb7-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-5" tabindex="-1"></a>    <span class="at">cell_id =</span> <span class="fu">col_factor</span>(<span class="cn">NULL</span>)</span>
+<span id="cb7-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-6" tabindex="-1"></a>  ),</span>
+<span id="cb7-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-7" tabindex="-1"></a>  <span class="at">col_select =</span> <span class="fu">c</span>(</span>
+<span id="cb7-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-8" tabindex="-1"></a>    chr,</span>
+<span id="cb7-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-9" tabindex="-1"></a>    start,</span>
+<span id="cb7-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-10" tabindex="-1"></a>    end,</span>
+<span id="cb7-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-11" tabindex="-1"></a>    reads,</span>
+<span id="cb7-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-12" tabindex="-1"></a>    copy,</span>
+<span id="cb7-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-13" tabindex="-1"></a>    state,</span>
+<span id="cb7-14"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-14" tabindex="-1"></a>    cell_id</span>
+<span id="cb7-15"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-15" tabindex="-1"></a>  )</span>
+<span id="cb7-16"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb7-16" tabindex="-1"></a>)</span></code></pre></div>
+<p>Subset copy number data by the filtered cell ids in the metrics table.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb8-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb8-1" tabindex="-1"></a>cn <span class="ot">&lt;-</span> cn <span class="sc">%&gt;%</span> <span class="fu">inner_join</span>(metrics[, <span class="fu">c</span>(<span class="st">&quot;cell_id&quot;</span>, <span class="st">&quot;sample_id&quot;</span>)], <span class="at">by =</span> <span class="st">&quot;cell_id&quot;</span>)</span>
+<span id="cb8-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb8-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(cn), <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="10%" />
+<col width="10%" />
+<col width="8%" />
+<col width="12%" />
+<col width="8%" />
+<col width="30%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">chr</th>
+<th align="right">start</th>
+<th align="right">end</th>
+<th align="right">reads</th>
+<th align="right">copy</th>
+<th align="right">state</th>
+<th align="left">cell_id</th>
+<th align="left">sample_id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1</td>
+<td align="right">500000</td>
+<td align="right">22</td>
+<td align="right">NA</td>
+<td align="right">5</td>
+<td align="left">SA922-A90554B-R28-C09</td>
+<td align="left">SA922</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">500001</td>
+<td align="right">1000000</td>
+<td align="right">609</td>
+<td align="right">NA</td>
+<td align="right">5</td>
+<td align="left">SA922-A90554B-R28-C09</td>
+<td align="left">SA922</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1000001</td>
+<td align="right">1500000</td>
+<td align="right">752</td>
+<td align="right">4.574060</td>
+<td align="right">5</td>
+<td align="left">SA922-A90554B-R28-C09</td>
+<td align="left">SA922</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">1500001</td>
+<td align="right">2000000</td>
+<td align="right">672</td>
+<td align="right">3.465685</td>
+<td align="right">5</td>
+<td align="left">SA922-A90554B-R28-C09</td>
+<td align="left">SA922</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">2000001</td>
+<td align="right">2500000</td>
+<td align="right">931</td>
+<td align="right">5.571458</td>
+<td align="right">5</td>
+<td align="left">SA922-A90554B-R28-C09</td>
+<td align="left">SA922</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">2500001</td>
+<td align="right">3000000</td>
+<td align="right">794</td>
+<td align="right">NA</td>
+<td align="right">5</td>
+<td align="left">SA922-A90554B-R28-C09</td>
+<td align="left">SA922</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="copy-number-exploration" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Copy number exploration<a href="ov2295-qc-and-total-copy-number-analysis.html#copy-number-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will plot cells using a scatter plot of normalized binned read count data. The data has been processed through HMMCopy analysis as part of the DLP single cell pipeline. The state column contains the prediction of integer copy number state for each cell. The copy column is raw read count normalized for ploidy, gc, and mappability. We will plot copy on the y axis and color by state, and wrap the plotting code in a function for use below.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb9-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-1" tabindex="-1"></a>plot_profile <span class="ot">&lt;-</span> <span class="cf">function</span>(cn) {</span>
+<span id="cb9-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-2" tabindex="-1"></a>  cn.colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="st">&quot;Blues&quot;</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="st">&quot;#CCCCCC&quot;</span>, <span class="fu">tail</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="st">&quot;OrRd&quot;</span>), <span class="dv">6</span>))</span>
+<span id="cb9-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-3" tabindex="-1"></a>  cn.colors <span class="ot">&lt;-</span> <span class="fu">c</span>(cn.colors, cn.colors[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>)])</span>
+<span id="cb9-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-4" tabindex="-1"></a>  <span class="fu">names</span>(cn.colors) <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb9-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-6" tabindex="-1"></a>  cn <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cn_state =</span> <span class="fu">factor</span>(state, <span class="fu">names</span>(cn.colors))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-8" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">chr =</span> <span class="fu">factor</span>(chr, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-9" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-10" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">y =</span> copy, <span class="at">colour =</span> cn_state), <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-11" tabindex="-1"></a>      <span class="fu">facet_grid</span>(<span class="sc">~</span>chr, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">space=</span><span class="st">&quot;free_x&quot;</span>, <span class="at">switch =</span> <span class="st">&quot;x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-12" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="fl">0.05</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-13" tabindex="-1"></a>      <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>()) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-14" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cn.colors, <span class="at">labels =</span> <span class="fu">names</span>(cn.colors), <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-15" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">8</span>, <span class="at">by =</span> <span class="dv">1</span>), <span class="at">limit =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-16" tabindex="-1"></a>      <span class="fu">xlab</span>(<span class="st">&#39;chromosome&#39;</span>)</span>
+<span id="cb9-17"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-17" tabindex="-1"></a>}</span>
+<span id="cb9-18"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-19" tabindex="-1"></a>plot_cell <span class="ot">&lt;-</span> <span class="cf">function</span>(cn, plot_cell_id) {</span>
+<span id="cb9-20"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-20" tabindex="-1"></a>  <span class="fu">filter</span>(cn, cell_id <span class="sc">==</span> plot_cell_id) <span class="sc">%&gt;%</span> <span class="fu">plot_profile</span>()</span>
+<span id="cb9-21"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb9-21" tabindex="-1"></a>}</span></code></pre></div>
+<p>The first cell we will plot is a near diploid cell with some amplified regions and many LOH regions including chromosome 17. The chromosome 17 LOH overlaps with a deliterious TP53 mutation, as is typical of high grade serous ovarian cancers.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb10-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb10-1" tabindex="-1"></a><span class="fu">plot_cell</span>(cn, <span class="st">&quot;SA1090-A96213A-R30-C61&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 740 rows containing missing values or values outside the scale
+## range (`geom_point()`).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+A second cell from the same cell line appears to be baseline tetraploid. Many of the amplified or deleted regions overlap with those of the diploid baseline cell. Copy 3 regions on chromosome 2 and 15 support the tetraploid solution.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb12-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb12-1" tabindex="-1"></a><span class="fu">plot_cell</span>(cn, <span class="st">&quot;SA1090-A96213A-R28-C68&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 762 rows containing missing values or values outside the scale
+## range (`geom_point()`).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>It will be useful to plot all cells together in a heatmap for a high level look at the heterogeneity. Here we rely on the very useful <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/">ComplexHeatmap package</a>. The plot takes a GenomicRanges object with columns as cells and rows as regions. A nice tutorial on GenomicRanges can be found <a href="https://bioconductor.github.io/BiocWorkshops/solving-common-bioinformatic-challenges-using-genomicranges.html">here</a>. The plot will use hierarchical clustering to order the cells and provide a summary of the similarity between groups of cells.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb14-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-1" tabindex="-1"></a>plot_heatmap <span class="ot">&lt;-</span> <span class="cf">function</span>(gr, <span class="at">dist_method =</span> <span class="st">&quot;euclidean&quot;</span>){</span>
+<span id="cb14-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-2" tabindex="-1"></a>  <span class="co">#&#39; plot a heatmap with chromosome boundaries</span></span>
+<span id="cb14-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-3" tabindex="-1"></a>  <span class="co">#&#39; the order of the rows can be customized here</span></span>
+<span id="cb14-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-4" tabindex="-1"></a>  <span class="co">#&#39; its a simple distance based clustering</span></span>
+<span id="cb14-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-5" tabindex="-1"></a>  <span class="co">#&#39;</span></span>
+<span id="cb14-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-6" tabindex="-1"></a>  <span class="co">#&#39; Adapted from code published by Velazquez-Villarreal et al. (2020):</span></span>
+<span id="cb14-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-7" tabindex="-1"></a>  <span class="co">#&#39; https://www.nature.com/articles/s42003-020-1044-8</span></span>
+<span id="cb14-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-8" tabindex="-1"></a>  <span class="co">#&#39;</span></span>
+<span id="cb14-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-9" tabindex="-1"></a>  <span class="co">#&#39; Uses the very useful ComplexHeatmap package:</span></span>
+<span id="cb14-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-10" tabindex="-1"></a>  <span class="co">#&#39; https://jokergoo.github.io/ComplexHeatmap-reference/book/</span></span>
+<span id="cb14-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-11" tabindex="-1"></a>  </span>
+<span id="cb14-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-12" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> GenomeInfoDb<span class="sc">::</span><span class="fu">sortSeqlevels</span>(gr)</span>
+<span id="cb14-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-13" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> <span class="fu">sort</span>(gr)</span>
+<span id="cb14-14"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-14" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-15" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(GenomicRanges<span class="sc">::</span><span class="fu">mcols</span>(gr))</span>
+<span id="cb14-16"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-16" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">t</span>(mat)</span>
+<span id="cb14-17"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-17" tabindex="-1"></a>  hr <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">get_dist</span>(mat, <span class="at">method =</span> dist_method), <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb14-18"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-18" tabindex="-1"></a>  hr <span class="ot">=</span> <span class="fu">as.dendrogram</span>(hr)</span>
+<span id="cb14-19"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-19" tabindex="-1"></a>  </span>
+<span id="cb14-20"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-20" tabindex="-1"></a>  <span class="co"># chromosome boundaries and midpoints for annotation</span></span>
+<span id="cb14-21"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-21" tabindex="-1"></a>  chr_ids <span class="ot">=</span> GenomicRanges<span class="sc">::</span><span class="fu">seqnames</span>(gr)<span class="sc">@</span>values</span>
+<span id="cb14-22"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-22" tabindex="-1"></a>  chr_lengths <span class="ot">=</span> GenomicRanges<span class="sc">::</span><span class="fu">seqnames</span>(gr)<span class="sc">@</span>lengths</span>
+<span id="cb14-23"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-23" tabindex="-1"></a>  chr_props <span class="ot">=</span> chr_lengths <span class="sc">/</span> <span class="fu">length</span>(gr)</span>
+<span id="cb14-24"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-24" tabindex="-1"></a>  mids <span class="ot">=</span> <span class="fu">cumsum</span>(chr_props) <span class="sc">-</span> (chr_props <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb14-25"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-25" tabindex="-1"></a>  boundaries <span class="ot">=</span> <span class="fu">cumsum</span>(chr_props)</span>
+<span id="cb14-26"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-26" tabindex="-1"></a>  boundaries <span class="ot">=</span> boundaries[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(boundaries)<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb14-27"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-27" tabindex="-1"></a>  abline_x <span class="ot">=</span> <span class="fu">rep</span>(boundaries, <span class="at">each=</span><span class="dv">2</span>)</span>
+<span id="cb14-28"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-28" tabindex="-1"></a>  abline_y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">times=</span><span class="fu">length</span>(boundaries))</span>
+<span id="cb14-29"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-29" tabindex="-1"></a>  abline_ids <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(boundaries),<span class="at">each=</span><span class="dv">2</span>)</span>
+<span id="cb14-30"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-30" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-31" tabindex="-1"></a>  <span class="co">#annotation to label chromosomes</span></span>
+<span id="cb14-32"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-32" tabindex="-1"></a>  ha_column <span class="ot">=</span> ComplexHeatmap<span class="sc">::</span><span class="fu">HeatmapAnnotation</span>(<span class="at">cn =</span> <span class="cf">function</span>(index) {</span>
+<span id="cb14-33"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-33" tabindex="-1"></a>    <span class="fu">grid.text</span>(chr_ids,<span class="at">x=</span>mids,<span class="at">y=</span><span class="dv">1</span>,<span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>),<span class="at">gp=</span><span class="fu">gpar</span>(<span class="at">col=</span><span class="st">&quot;#202020&quot;</span>,<span class="at">fontsize=</span><span class="dv">6</span>))</span>
+<span id="cb14-34"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-34" tabindex="-1"></a>  })</span>
+<span id="cb14-35"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-35" tabindex="-1"></a>  </span>
+<span id="cb14-36"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-36" tabindex="-1"></a>  <span class="co"># the main heatmap</span></span>
+<span id="cb14-37"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-37" tabindex="-1"></a>  cn.colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="st">&quot;Blues&quot;</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="st">&quot;#CCCCCC&quot;</span>, <span class="fu">tail</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="st">&quot;OrRd&quot;</span>), <span class="dv">6</span>))</span>
+<span id="cb14-38"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-38" tabindex="-1"></a>  cn.colors <span class="ot">&lt;-</span> <span class="fu">c</span>(cn.colors, cn.colors[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>)])</span>
+<span id="cb14-39"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-39" tabindex="-1"></a>  <span class="fu">names</span>(cn.colors) <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb14-40"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-40" tabindex="-1"></a></span>
+<span id="cb14-41"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-41" tabindex="-1"></a>  hm <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">Heatmap</span>(</span>
+<span id="cb14-42"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-42" tabindex="-1"></a>    <span class="at">matrix =</span> mat,</span>
+<span id="cb14-43"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-43" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;ploidy&quot;</span>,</span>
+<span id="cb14-44"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-44" tabindex="-1"></a>    <span class="at">col =</span> cn.colors,</span>
+<span id="cb14-45"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-45" tabindex="-1"></a>    <span class="at">cluster_rows =</span> hr,</span>
+<span id="cb14-46"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-46" tabindex="-1"></a>    <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-47"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-47" tabindex="-1"></a>    <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-48"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-48" tabindex="-1"></a>    <span class="at">bottom_annotation =</span> ha_column,</span>
+<span id="cb14-49"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-49" tabindex="-1"></a>    <span class="at">column_title =</span> <span class="st">&quot;CNV heatmap&quot;</span>,</span>
+<span id="cb14-50"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-50" tabindex="-1"></a>    <span class="at">use_raster =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-51"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-51" tabindex="-1"></a>  )</span>
+<span id="cb14-52"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-52" tabindex="-1"></a>  </span>
+<span id="cb14-53"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-53" tabindex="-1"></a>  ComplexHeatmap<span class="sc">::</span><span class="fu">draw</span>(hm, <span class="at">row_dend_side =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb14-54"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-54" tabindex="-1"></a></span>
+<span id="cb14-55"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-55" tabindex="-1"></a>  ComplexHeatmap<span class="sc">::</span><span class="fu">decorate_heatmap_body</span>(<span class="st">&quot;ploidy&quot;</span>, {</span>
+<span id="cb14-56"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-56" tabindex="-1"></a>    <span class="fu">grid.polyline</span>(</span>
+<span id="cb14-57"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-57" tabindex="-1"></a>      <span class="at">x =</span> abline_x,</span>
+<span id="cb14-58"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-58" tabindex="-1"></a>      <span class="at">y =</span> abline_y,</span>
+<span id="cb14-59"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-59" tabindex="-1"></a>      <span class="at">id =</span> abline_ids,</span>
+<span id="cb14-60"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-60" tabindex="-1"></a>      <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">1</span>))</span>
+<span id="cb14-61"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-61" tabindex="-1"></a>  })</span>
+<span id="cb14-62"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb14-62" tabindex="-1"></a>}</span></code></pre></div>
+<p>Plotting SA1090 (the primary sample), we can see that there are two major groups, a baseline diploid and a baseline tetraploid group. Both groups harbour additional heterogeneity. Looking closely, it appears that many of the patterns that distinguish populations within the diploid group are also found in the tetraploid group.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb15-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-1" tabindex="-1"></a>gr <span class="ot">&lt;-</span> cn <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-2" tabindex="-1"></a>  <span class="fu">filter</span>(sample_id <span class="sc">==</span> <span class="st">&quot;SA1090&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chr, start, end, state, cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cell_id, <span class="at">values_from =</span> state) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-5" tabindex="-1"></a>  GenomicRanges<span class="sc">::</span><span class="fu">makeGRangesFromDataFrame</span>(<span class="at">keep.extra.columns=</span><span class="cn">TRUE</span>,<span class="at">ignore.strand=</span><span class="cn">TRUE</span>)</span>
+<span id="cb15-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb15-7" tabindex="-1"></a><span class="fu">plot_heatmap</span>(gr)</span></code></pre></div>
+<pre><code>## &#39;magick&#39; package is suggested to install to give better rasterization.
+## 
+## Set `ht_opt$message = FALSE` to turn off this message.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>The default distance method for generating the hierarchical clustering was eucldean, which will naturally result in large distances between diploid and tetraploid cells. Alternative distance methods can be specified, see the get_dist function from <a href="https://www.rdocumentation.org/packages/factoextra/versions/1.0.7/topics/dist">factoextras</a>. If we use pearson correlation as the distance method, we see significant mixing of the diploid and tetraploid populations indicating that tetraploidization is occuring independently and sporadically throughout the population.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb17-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb17-1" tabindex="-1"></a><span class="fu">plot_heatmap</span>(gr, <span class="at">dist_method =</span> <span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
+<pre><code>## &#39;magick&#39; package is suggested to install to give better rasterization.
+## 
+## Set `ht_opt$message = FALSE` to turn off this message.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>If we plot total_reads by mean_copy (average ploidy) there appears to be a relationship, likely due to the fact that tetraploid cells will have twice the DNA available and take up more sequencing realestate. Classifying diploid and tetraploid, the difference in mean total_reads is highly significant, further evidence the tetraploid cells are truly tetraploid. Some cells classified as diploid may in fact be tetraploid with a perfect doubling of all chromosomes though this would be difficult to determine without orthogonal experiments. Note that we havent ruled out doublets with certainty.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb19-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb19-1" tabindex="-1"></a>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb19-2" tabindex="-1"></a>  <span class="fu">filter</span>(sample_id <span class="sc">==</span> <span class="st">&quot;SA1090&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb19-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mean_copy, <span class="at">y=</span>total_reads)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb19-4" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&#39;lm&#39;</span>, <span class="at">formula=</span> y<span class="sc">~</span>x)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb20-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb20-1" tabindex="-1"></a>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb20-2" tabindex="-1"></a>  <span class="fu">filter</span>(sample_id <span class="sc">==</span> <span class="st">&quot;SA1090&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb20-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_polyploid =</span> mean_copy <span class="sc">&gt;</span> <span class="fl">2.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb20-4" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>is_polyploid, <span class="at">y=</span>total_reads)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb20-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb20-5" tabindex="-1"></a>    <span class="fu">stat_compare_means</span>(<span class="at">label.x =</span> <span class="fl">1.3</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+</div>
+<div id="clustering" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Clustering<a href="ov2295-qc-and-total-copy-number-analysis.html#clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In order to further understand the population structure we can cluster the cells by their copy number profiles. It is worth noting that for some datasets, clustering is inappropriate. If the population of cells is continuously evolving and accruing neutral copy number changes, the cells will lie on a continuum of copy number change. Any maximal set of related cells could be considered a ‘cluster’ if a copy number change exists specific to that set of cells. In such a case phylogenetic representation is more appropriate. However, in many real datasets sets of cells will cluster due to either selection having favoured the expansion of some cell populations and the extinction of others.</p>
+<p>We will first cluster the cells using k-means. Independent segmentation of each cell using HMMCopy can produce small differences in segment boundaries that may affect clustering. We will thus cluster based on the raw copy number (‘copy’ column) instead of the HMMCopy state. Start by creating a matrix of raw copy number values, filtering bins with NaNs in any cell and scaling the data to allow clustering of cells with dissimilar ploidy.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb21-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-1" tabindex="-1"></a>gr <span class="ot">&lt;-</span> cn <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chr, start, end, copy, cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cell_id, <span class="at">values_from =</span> copy) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-4" tabindex="-1"></a>  GenomicRanges<span class="sc">::</span><span class="fu">makeGRangesFromDataFrame</span>(<span class="at">keep.extra.columns=</span><span class="cn">TRUE</span>,<span class="at">ignore.strand=</span><span class="cn">TRUE</span>)</span>
+<span id="cb21-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-5" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-6" tabindex="-1"></a><span class="co"># Remove bins with any nan across any cell</span></span>
+<span id="cb21-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-7" tabindex="-1"></a>gr <span class="ot">&lt;-</span> gr[<span class="fu">complete.cases</span>(GenomicRanges<span class="sc">::</span><span class="fu">mcols</span>(gr))]</span>
+<span id="cb21-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-8" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-9" tabindex="-1"></a><span class="co"># Create matrix, remove bins that are nan across any cells</span></span>
+<span id="cb21-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-10" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(GenomicRanges<span class="sc">::</span><span class="fu">mcols</span>(gr))</span>
+<span id="cb21-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-11" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-12" tabindex="-1"></a><span class="co"># Optionally normalize the copy number, this will group cells regardless of ploidy</span></span>
+<span id="cb21-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-13" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">scale</span>(mat)</span>
+<span id="cb21-14"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-14" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb21-15" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">t</span>(mat)</span></code></pre></div>
+<p>We will then use PCA to transform the data to a reduced dimensionality representation. In bin level copy number data, many of the bins will be highly correlated especially with neighboring bins subject to the same copy number change. PCA will effectively compress multiple correlated bins into a single dimension. Working with the top PCA components will be desirable because it decreases the computational burden of downstream computation (ie clustering) and reduces noise by averaging across multiple bins. PCA can be run using the <code>prcomp</code> function:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb22-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb22-1" tabindex="-1"></a>mat.pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(mat)</span></code></pre></div>
+<p>It can be informative to plot the PCA loadings of the top components. The loadings for a given component represent how much each bin contributes to that component. Large positive or negative values indicate a strong positive or negative correlation of the bin with the component respectively. Values close to 0 indicate the bin is uncorrelated with the component. The PCA loading plot can be helpful in identifying problematic noisy bins. These bins will show up as isolated spikes in the PCA loading plot. The first PCA plotted below looks unproblematic. Try setting the value of a bin to 1000 for a subset of cells and redoing the PCA to see the effect.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb23-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-1" tabindex="-1"></a>pc <span class="ot">=</span> <span class="st">&quot;PC1&quot;</span></span>
+<span id="cb23-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-3" tabindex="-1"></a>gr.pca <span class="ot">&lt;-</span> <span class="fu">granges</span>(gr)</span>
+<span id="cb23-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-4" tabindex="-1"></a>GenomicRanges<span class="sc">::</span><span class="fu">mcols</span>(gr.pca) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">PC=</span>mat.pca<span class="sc">$</span>rotation[, pc])</span>
+<span id="cb23-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-5" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-6" tabindex="-1"></a>GenomicRanges<span class="sc">::</span><span class="fu">as.data.frame</span>(gr.pca) <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-7" tabindex="-1"></a>  <span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">chr=</span>seqnames) <span class="sc">%&gt;%</span></span>
+<span id="cb23-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-9" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-10" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">y =</span> PC), <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-11" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span>chr, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">space=</span><span class="st">&quot;free_x&quot;</span>, <span class="at">switch =</span> <span class="st">&quot;x&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-12" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="fl">0.05</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-13" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>()) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb23-14" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&#39;chromosome&#39;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Now run k-means on the first 50 PCs. Use 12 cluster centers and 100 restarts and set a seed for consistency.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb24-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb24-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb24-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb24-2" tabindex="-1"></a>clust.kmeans <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(mat.pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>], <span class="at">centers=</span><span class="dv">12</span>, <span class="at">nstart=</span><span class="dv">100</span>)</span>
+<span id="cb24-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb24-3" tabindex="-1"></a>clust <span class="ot">&lt;-</span> clust.kmeans<span class="sc">$</span>cluster</span></code></pre></div>
+<p>UMAP is a non-linear dimensionality reduction technique favoured for its ability to preserve much of the structure of the data in a 2-D plot. We can use UMAP to visualize the clustering.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb25-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb25-1" tabindex="-1"></a>mat.umap <span class="ot">&lt;-</span> <span class="fu">umap</span>(mat)</span>
+<span id="cb25-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb25-2" tabindex="-1"></a>mat.umap.tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span>mat.umap<span class="sc">$</span>layout[,<span class="dv">1</span>], <span class="at">y=</span>mat.umap<span class="sc">$</span>layout[,<span class="dv">2</span>], <span class="at">cluster=</span><span class="fu">factor</span>(clust))</span>
+<span id="cb25-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb25-3" tabindex="-1"></a><span class="fu">ggplot</span>(mat.umap.tbl) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">color=</span>cluster))</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>We can also assess the clustering using the silhouette method. Briefly, the <a href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">silhouette width statistic</a> is calculated based on the mean distance of a datapoint to every other datapoint in the same cluster, and the mean distance to datapoints in the next closest cluster. A silhouette width less than 0 could indicate the cell may be better assigned to a different cluster, the cell is an outlier, or the data are not spherically distributed around cluster centers.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb26-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-1" tabindex="-1"></a>sil.approx <span class="ot">&lt;-</span> <span class="fu">approxSilhouette</span>(mat, <span class="at">clusters=</span>clust)</span>
+<span id="cb26-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-2" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-3" tabindex="-1"></a>sil.data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sil.approx)</span>
+<span id="cb26-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-4" tabindex="-1"></a>sil.data<span class="sc">$</span>closest <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(sil.data<span class="sc">$</span>width <span class="sc">&gt;</span> <span class="dv">0</span>, clust, sil.data<span class="sc">$</span>other))</span>
+<span id="cb26-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-5" tabindex="-1"></a>sil.data<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(clust)</span>
+<span id="cb26-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-6" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-7" tabindex="-1"></a><span class="fu">ggplot</span>(sil.data, <span class="fu">aes</span>(<span class="at">x=</span>cluster, <span class="at">y=</span>width, <span class="at">colour=</span>closest)) <span class="sc">+</span> </span>
+<span id="cb26-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb26-8" tabindex="-1"></a>    ggbeeswarm<span class="sc">::</span><span class="fu">geom_quasirandom</span>(<span class="at">method=</span><span class="st">&quot;smiley&quot;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>We used k=12 cluster centers somewhat arbitrarily. Many strategies exist for selecting an appropriate value for k. For instance, we could use the gap statistic to select an optimal k as shown below. The optimal number of clusters suggested by this method may be less than expected reflecting the issues with clustering, especially k-means clustering, on this type of data. Generally speaking, differences between sub-populations will vary widely in scale with some populations well separated by large copy number changes and other derivative populations differing only by a few changes.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb27-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-1" tabindex="-1"></a>gaps <span class="ot">&lt;-</span> <span class="fu">clusGap</span>(mat.pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>], kmeans, <span class="at">K.max=</span><span class="dv">30</span>, <span class="at">B=</span><span class="dv">100</span>)</span>
+<span id="cb27-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-2" tabindex="-1"></a>best.k <span class="ot">&lt;-</span> <span class="fu">maxSE</span>(gaps<span class="sc">$</span>Tab[,<span class="st">&quot;gap&quot;</span>], gaps<span class="sc">$</span>Tab[,<span class="st">&quot;SE.sim&quot;</span>])</span>
+<span id="cb27-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-4" tabindex="-1"></a><span class="fu">as_tibble</span>(gaps<span class="sc">$</span>Tab) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">k=</span><span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-5" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-6" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>k, <span class="at">y=</span>gap)) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-7" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>best.k, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="fl">0.5</span>, <span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-8" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;Number of clusters&quot;</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb27-9" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Gap statistic&quot;</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Alternative clustering approaches are possible, see <a href="https://bioconductor.org/books/release/OSCA/clustering.html">this excellent scRNA tutorial</a> for ideas. For instance, a graph based clustering approach could work better for clustering copy number data in some cases, as graph based methods will not favour spherical clusters.</p>
+<p>In order to visualize the cluster copy number, lets modify our heatmap plotting function to take in a clustering, order the rows by each cell’s cluster label, and annotate the clusters on the left side of the heatmap.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb28-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-1" tabindex="-1"></a>plot_cluster_heatmap <span class="ot">&lt;-</span> <span class="cf">function</span>(gr, clust){</span>
+<span id="cb28-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-2" tabindex="-1"></a>  <span class="co">#&#39; plot a heatmap with chromosome boundaries</span></span>
+<span id="cb28-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-3" tabindex="-1"></a>  <span class="co">#&#39; the order of the rows can be customized here</span></span>
+<span id="cb28-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-4" tabindex="-1"></a>  <span class="co">#&#39; its a simple distance based clustering</span></span>
+<span id="cb28-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-5" tabindex="-1"></a>  <span class="co">#&#39;</span></span>
+<span id="cb28-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-6" tabindex="-1"></a>  <span class="co">#&#39; Adapted from code published by Velazquez-Villarreal et al. (2020):</span></span>
+<span id="cb28-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-7" tabindex="-1"></a>  <span class="co">#&#39; https://www.nature.com/articles/s42003-020-1044-8</span></span>
+<span id="cb28-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-8" tabindex="-1"></a>  <span class="co">#&#39;</span></span>
+<span id="cb28-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-9" tabindex="-1"></a>  <span class="co">#&#39; Uses the very useful ComplexHeatmap package:</span></span>
+<span id="cb28-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-10" tabindex="-1"></a>  <span class="co">#&#39; https://jokergoo.github.io/ComplexHeatmap-reference/book/</span></span>
+<span id="cb28-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-11" tabindex="-1"></a>  </span>
+<span id="cb28-12"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-12" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> GenomeInfoDb<span class="sc">::</span><span class="fu">sortSeqlevels</span>(gr)</span>
+<span id="cb28-13"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-13" tabindex="-1"></a>  gr <span class="ot">&lt;-</span> <span class="fu">sort</span>(gr)</span>
+<span id="cb28-14"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-14" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-15" tabindex="-1"></a>  sorted_clust <span class="ot">=</span> <span class="fu">sort</span>(clust)</span>
+<span id="cb28-16"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-16" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-17" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(GenomicRanges<span class="sc">::</span><span class="fu">mcols</span>(gr))</span>
+<span id="cb28-18"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-18" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">t</span>(mat)</span>
+<span id="cb28-19"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-19" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> mat[<span class="fu">names</span>(sorted_clust),]</span>
+<span id="cb28-20"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-20" tabindex="-1"></a>  </span>
+<span id="cb28-21"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-21" tabindex="-1"></a>  <span class="co"># chromosome boundaries and midpoints for annotation</span></span>
+<span id="cb28-22"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-22" tabindex="-1"></a>  chr_ids <span class="ot">=</span> GenomicRanges<span class="sc">::</span><span class="fu">seqnames</span>(gr)<span class="sc">@</span>values</span>
+<span id="cb28-23"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-23" tabindex="-1"></a>  chr_lengths <span class="ot">=</span> GenomicRanges<span class="sc">::</span><span class="fu">seqnames</span>(gr)<span class="sc">@</span>lengths</span>
+<span id="cb28-24"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-24" tabindex="-1"></a>  chr_props <span class="ot">=</span> chr_lengths <span class="sc">/</span> <span class="fu">length</span>(gr)</span>
+<span id="cb28-25"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-25" tabindex="-1"></a>  mids <span class="ot">=</span> <span class="fu">cumsum</span>(chr_props) <span class="sc">-</span> (chr_props <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb28-26"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-26" tabindex="-1"></a>  boundaries <span class="ot">=</span> <span class="fu">cumsum</span>(chr_props)</span>
+<span id="cb28-27"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-27" tabindex="-1"></a>  boundaries <span class="ot">=</span> boundaries[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(boundaries)<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb28-28"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-28" tabindex="-1"></a>  abline_x <span class="ot">=</span> <span class="fu">rep</span>(boundaries, <span class="at">each=</span><span class="dv">2</span>)</span>
+<span id="cb28-29"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-29" tabindex="-1"></a>  abline_y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">times=</span><span class="fu">length</span>(boundaries))</span>
+<span id="cb28-30"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-30" tabindex="-1"></a>  abline_ids <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(boundaries),<span class="at">each=</span><span class="dv">2</span>)</span>
+<span id="cb28-31"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-31" tabindex="-1"></a></span>
+<span id="cb28-32"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-32" tabindex="-1"></a>  <span class="co"># annotation to label chromosomes</span></span>
+<span id="cb28-33"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-33" tabindex="-1"></a>  ha_column <span class="ot">=</span> ComplexHeatmap<span class="sc">::</span><span class="fu">HeatmapAnnotation</span>(<span class="at">cn =</span> <span class="cf">function</span>(index) {</span>
+<span id="cb28-34"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-34" tabindex="-1"></a>    <span class="fu">grid.text</span>(chr_ids,<span class="at">x=</span>mids,<span class="at">y=</span><span class="dv">1</span>,<span class="at">just =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>),<span class="at">gp=</span><span class="fu">gpar</span>(<span class="at">col=</span><span class="st">&quot;#202020&quot;</span>,<span class="at">fontsize=</span><span class="dv">6</span>))</span>
+<span id="cb28-35"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-35" tabindex="-1"></a>  })</span>
+<span id="cb28-36"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-36" tabindex="-1"></a></span>
+<span id="cb28-37"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-37" tabindex="-1"></a>  <span class="co"># cluster annotation</span></span>
+<span id="cb28-38"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-38" tabindex="-1"></a>  cluster_colors <span class="ot">=</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(<span class="fu">unique</span>(sorted_clust)))</span>
+<span id="cb28-39"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-39" tabindex="-1"></a>  <span class="fu">names</span>(cluster_colors) <span class="ot">=</span> <span class="fu">unique</span>(sorted_clust)</span>
+<span id="cb28-40"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-40" tabindex="-1"></a>  ha_row <span class="ot">=</span> ComplexHeatmap<span class="sc">::</span><span class="fu">rowAnnotation</span>(<span class="at">cluster =</span> <span class="fu">factor</span>(sorted_clust), <span class="at">col =</span> <span class="fu">list</span>(<span class="at">cluster =</span> cluster_colors))</span>
+<span id="cb28-41"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-41" tabindex="-1"></a></span>
+<span id="cb28-42"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-42" tabindex="-1"></a>  <span class="co"># the main heatmap</span></span>
+<span id="cb28-43"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-43" tabindex="-1"></a>  cn.colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="st">&quot;Blues&quot;</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="st">&quot;#CCCCCC&quot;</span>, <span class="fu">tail</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="st">&quot;OrRd&quot;</span>), <span class="dv">6</span>))</span>
+<span id="cb28-44"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-44" tabindex="-1"></a>  cn.colors <span class="ot">&lt;-</span> <span class="fu">c</span>(cn.colors, cn.colors[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>)])</span>
+<span id="cb28-45"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-45" tabindex="-1"></a>  <span class="fu">names</span>(cn.colors) <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb28-46"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-46" tabindex="-1"></a></span>
+<span id="cb28-47"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-47" tabindex="-1"></a>  hm <span class="ot">=</span> ComplexHeatmap<span class="sc">::</span><span class="fu">Heatmap</span>(</span>
+<span id="cb28-48"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-48" tabindex="-1"></a>    <span class="at">matrix =</span> mat,</span>
+<span id="cb28-49"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-49" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;ploidy&quot;</span>,</span>
+<span id="cb28-50"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-50" tabindex="-1"></a>    <span class="at">col =</span> cn.colors,</span>
+<span id="cb28-51"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-51" tabindex="-1"></a>    <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-52"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-52" tabindex="-1"></a>    <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-53"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-53" tabindex="-1"></a>    <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb28-54"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-54" tabindex="-1"></a>    <span class="at">bottom_annotation =</span> ha_column,</span>
+<span id="cb28-55"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-55" tabindex="-1"></a>    <span class="at">left_annotation =</span> ha_row,</span>
+<span id="cb28-56"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-56" tabindex="-1"></a>    <span class="at">column_title =</span> <span class="st">&quot;CNV heatmap&quot;</span>,</span>
+<span id="cb28-57"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-57" tabindex="-1"></a>    <span class="at">use_raster =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-58"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-58" tabindex="-1"></a>  )</span>
+<span id="cb28-59"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-59" tabindex="-1"></a>  </span>
+<span id="cb28-60"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-60" tabindex="-1"></a>  ComplexHeatmap<span class="sc">::</span><span class="fu">draw</span>(hm)</span>
+<span id="cb28-61"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-61" tabindex="-1"></a></span>
+<span id="cb28-62"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-62" tabindex="-1"></a>  ComplexHeatmap<span class="sc">::</span><span class="fu">decorate_heatmap_body</span>(<span class="st">&quot;ploidy&quot;</span>, {</span>
+<span id="cb28-63"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-63" tabindex="-1"></a>    <span class="fu">grid.polyline</span>(</span>
+<span id="cb28-64"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-64" tabindex="-1"></a>      <span class="at">x =</span> abline_x,</span>
+<span id="cb28-65"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-65" tabindex="-1"></a>      <span class="at">y =</span> abline_y,</span>
+<span id="cb28-66"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-66" tabindex="-1"></a>      <span class="at">id =</span> abline_ids,</span>
+<span id="cb28-67"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-67" tabindex="-1"></a>      <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">1</span>))</span>
+<span id="cb28-68"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-68" tabindex="-1"></a>  })</span>
+<span id="cb28-69"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb28-69" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb29-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb29-1" tabindex="-1"></a>gr <span class="ot">&lt;-</span> cn <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb29-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(chr, start, end, state, cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb29-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> cell_id, <span class="at">values_from =</span> state) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb29-4" tabindex="-1"></a>  GenomicRanges<span class="sc">::</span><span class="fu">makeGRangesFromDataFrame</span>(<span class="at">keep.extra.columns=</span><span class="cn">TRUE</span>,<span class="at">ignore.strand=</span><span class="cn">TRUE</span>)</span>
+<span id="cb29-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb29-5" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb29-6" tabindex="-1"></a><span class="fu">plot_cluster_heatmap</span>(gr, clust)</span></code></pre></div>
+<pre><code>## &#39;magick&#39; package is suggested to install to give better rasterization.
+## 
+## Set `ht_opt$message = FALSE` to turn off this message.</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>We can also merge cell copy number data by cluster to show aggregate cluster level copy number.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb31-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-1" tabindex="-1"></a>clust.df <span class="ot">&lt;-</span> <span class="fu">enframe</span>(clust.kmeans<span class="sc">$</span>cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cell_id =</span> name, <span class="at">cluster =</span> value)</span>
+<span id="cb31-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-3" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-4" tabindex="-1"></a>clust.sizes <span class="ot">&lt;-</span> <span class="fu">enframe</span>(<span class="fu">table</span>(clust.df<span class="sc">$</span>cluster)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cell_id =</span> name, <span class="at">size =</span> value) <span class="sc">%&gt;%</span></span>
+<span id="cb31-6"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-6" tabindex="-1"></a>  <span class="fu">filter</span>(size <span class="sc">&gt;=</span> <span class="dv">10</span>)</span>
+<span id="cb31-7"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-7" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-8" tabindex="-1"></a>cn_clust <span class="ot">&lt;-</span> cn <span class="sc">%&gt;%</span></span>
+<span id="cb31-9"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-9" tabindex="-1"></a>  <span class="fu">inner_join</span>(clust.df) <span class="sc">%&gt;%</span></span>
+<span id="cb31-10"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-10" tabindex="-1"></a>  <span class="fu">group_by</span>(chr, start, end, cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb31-11"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb31-11" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">copy =</span> <span class="fu">mean</span>(copy), <span class="at">state =</span> <span class="fu">median</span>(state))</span></code></pre></div>
+<pre><code>## Joining with `by = join_by(cell_id)`
+## `summarise()` has grouped output by &#39;chr&#39;, &#39;start&#39;, &#39;end&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb33-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb33-1" tabindex="-1"></a>cn_clust <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cluster <span class="sc">==</span> <span class="dv">7</span>) <span class="sc">%&gt;%</span> <span class="fu">plot_profile</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 806 rows containing missing values or values outside the scale
+## range (`geom_point()`).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb35-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb35-1" tabindex="-1"></a>cn_clust <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cluster <span class="sc">==</span> <span class="dv">8</span>) <span class="sc">%&gt;%</span> <span class="fu">plot_profile</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 957 rows containing missing values or values outside the scale
+## range (`geom_point()`).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb37-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb37-1" tabindex="-1"></a>cn_clust <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cluster <span class="sc">==</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> <span class="fu">plot_profile</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 915 rows containing missing values or values outside the scale
+## range (`geom_point()`).</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-26-3.png" width="672" /></p>
+<p>There appears to be a deletion on chromosome 5. Navigate here to see why:
+<a href="http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr5%3A67500000%2D72000002&amp;hgsid=1117136619_dGtW3EEOeJAIG6cYbSGFZwGwyLzb" class="uri">http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr5%3A67500000%2D72000002&amp;hgsid=1117136619_dGtW3EEOeJAIG6cYbSGFZwGwyLzb</a></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb39-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb39-1" tabindex="-1"></a>subset.gr <span class="ot">&lt;-</span> cn_clust <span class="sc">%&gt;%</span> <span class="fu">filter</span>(copy <span class="sc">&lt;</span> <span class="fl">0.2</span>, chr <span class="sc">!=</span> <span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">makeGRangesFromDataFrame</span>()</span>
+<span id="cb39-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb39-2" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb39-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(subset.gr, <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">seqnames</th>
+<th align="right">start</th>
+<th align="right">end</th>
+<th align="right">width</th>
+<th align="left">strand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69000001</td>
+<td align="right">69500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69000001</td>
+<td align="right">69500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69000001</td>
+<td align="right">69500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69000001</td>
+<td align="right">69500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69000001</td>
+<td align="right">69500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69000001</td>
+<td align="right">69500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">69500001</td>
+<td align="right">70000000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">70000001</td>
+<td align="right">70500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">70000001</td>
+<td align="right">70500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">70000001</td>
+<td align="right">70500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">70000001</td>
+<td align="right">70500000</td>
+<td align="right">5e+05</td>
+<td align="left">*</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, lets look at the gene content of some of the high level amplifications. First read in a list of known oncogenic amplified genes from the cancer gene census. Read hg19 genes from <code>TxDb.Hsapiens.UCSC.hg19.knownGene</code> and be careful to rename chromosomes, ie “chr9” -&gt; “9”. Add gene symbols from <code>org.Hs.egSYMBOL</code>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb40-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb40-1" tabindex="-1"></a>cencus.amps <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;Census_ampThu\ Apr\ 16\ 15_35_36\ 2020.csv&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb40-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">symbol =</span> <span class="st">`</span><span class="at">Gene Symbol</span><span class="st">`</span>)</span></code></pre></div>
+<pre><code>## Rows: 24 Columns: 7
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (5): Gene Symbol, Name, Genome Location, Tumour Types(Somatic), Synonyms
+## dbl (2): Entrez GeneId, Tier
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb42-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb42-1" tabindex="-1"></a><span class="co"># read human genes, normalize chromosome names</span></span>
+<span id="cb42-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb42-2" tabindex="-1"></a>human.genes <span class="ot">&lt;-</span> <span class="fu">genes</span>(TxDb.Hsapiens.UCSC.hg19.knownGene)</span></code></pre></div>
+<pre><code>##   403 genes were dropped because they have exons located on both strands
+##   of the same reference sequence or on more than one reference sequence,
+##   so cannot be represented by a single genomic range.
+##   Use &#39;single.strand.genes.only=FALSE&#39; to get all the genes in a
+##   GRangesList object, or use suppressMessages() to suppress this message.</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb44-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb44-1" tabindex="-1"></a>human.genes <span class="ot">&lt;-</span> <span class="fu">renameSeqlevels</span>(human.genes, <span class="fu">sub</span>(<span class="st">&quot;chr&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">seqlevels</span>(human.genes)))</span>
+<span id="cb44-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb44-2" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb44-3" tabindex="-1"></a><span class="co"># add gene symbol from org.Hs.egSYMBOL</span></span>
+<span id="cb44-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb44-4" tabindex="-1"></a>GenomicRanges<span class="sc">::</span><span class="fu">mcols</span>(human.genes) <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">gene_id=</span>human.genes<span class="sc">$</span>gene_id) <span class="sc">%&gt;%</span></span>
+<span id="cb44-5"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb44-5" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">tibble</span>(<span class="fu">as.data.frame</span>(org.Hs.egSYMBOL)))</span></code></pre></div>
+<pre><code>## Joining with `by = join_by(gene_id)`</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb46-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb46-1" tabindex="-1"></a><span class="co"># subset by cancer gene cencus amps</span></span>
+<span id="cb46-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb46-2" tabindex="-1"></a>cencus.amps.genes <span class="ot">&lt;-</span> human.genes[(<span class="fu">elementMetadata</span>(human.genes)[,<span class="st">&#39;symbol&#39;</span>] <span class="sc">%in%</span> cencus.amps<span class="sc">$</span>symbol)]</span></code></pre></div>
+<p>Filter copy number for high level events, then subset by overlap with gene regions. The SOX2 gene is amplified.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb47-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb47-1" tabindex="-1"></a>subset.gr <span class="ot">&lt;-</span> cn_clust <span class="sc">%&gt;%</span> <span class="fu">filter</span>(copy <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">makeGRangesFromDataFrame</span>(<span class="at">keep.extra.columns=</span><span class="cn">TRUE</span>,<span class="at">ignore.strand=</span><span class="cn">TRUE</span>)</span>
+<span id="cb47-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb47-2" tabindex="-1"></a>subset.genes <span class="ot">&lt;-</span> <span class="fu">subsetByOverlaps</span>(cencus.amps.genes, subset.gr)</span>
+<span id="cb47-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb47-3" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb47-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(subset.genes, <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">seqnames</th>
+<th align="right">start</th>
+<th align="right">end</th>
+<th align="right">width</th>
+<th align="left">strand</th>
+<th align="left">gene_id</th>
+<th align="left">symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">181429712</td>
+<td align="right">181432223</td>
+<td align="right">2512</td>
+<td align="left">+</td>
+<td align="left">6657</td>
+<td align="left">SOX2</td>
+</tr>
+</tbody>
+</table>
+<p>Overlapping the SOX2 region with all cluster copy number we find that SOX2 is subclonally amplified.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r codeblock"><code class="sourceCode r"><span id="cb48-1"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb48-1" tabindex="-1"></a>all.gr <span class="ot">&lt;-</span> cn_clust <span class="sc">%&gt;%</span> <span class="fu">makeGRangesFromDataFrame</span>(<span class="at">keep.extra.columns=</span><span class="cn">TRUE</span>,<span class="at">ignore.strand=</span><span class="cn">TRUE</span>)</span>
+<span id="cb48-2"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb48-2" tabindex="-1"></a><span class="fu">subsetByOverlaps</span>(all.gr, subset.genes) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb48-3" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="ov2295-qc-and-total-copy-number-analysis.html#cb48-4" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(cluster), <span class="at">y=</span>copy))</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="allele-specific-analysis-of-ov2295.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book.pdf", "book.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
